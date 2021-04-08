@@ -1,3 +1,3 @@
-# VPR_Management
+# littlePS
 team
-声纹识别项目
+基于qt的类PS项目
