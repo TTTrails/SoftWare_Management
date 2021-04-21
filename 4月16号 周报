@@ -1,0 +1,8 @@
+工作内容：
+    王雨一、张昱：学习mvvm框架的view模块，设计界面
+    许多维、朱熠凯：学习mvvm框架的model模块，设计函数及接口
+    王茂宇、林嵘：学习mvvm框架的的viewmodel模块，设计函数及接口
+下周工作计划：
+    王雨一、张昱：初步完成view
+    许多维、朱熠凯：初步完成model及内部函数
+    王茂宇、林嵘：初步完成viewmodel，设计串联view-viewmodel、model-viewmodel
