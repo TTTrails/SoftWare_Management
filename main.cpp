@@ -5,6 +5,7 @@
 //测试机 test2
 //test 3
 //wyy test
+//wyy testpush
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
