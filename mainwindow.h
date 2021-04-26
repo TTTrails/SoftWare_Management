@@ -2,6 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDialog>
+#include <QFileDialog>
+#include <QPainter>
+#include <QDebug>
+#include <QMessageBox>
+#include <QPixmap>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,6 +28,8 @@ private slots:
 
     void on_action_grey_to_binary_triggered();
 
+    void on_action_color_to_grey_triggered();
+
 private:
 //绘图事件处理，虚函数
     void paintEvent(QPaintEvent*);
@@ -31,5 +40,9 @@ private:
     QString filePath;
 //是否打开图片
     bool isPicOpen;
+//rect 区域
+    QRect curRect;
+//显示的Qimage对象
+    QImage curImage;
 };
 #endif // MAINWINDOW_H
