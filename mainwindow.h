@@ -30,6 +30,10 @@ private slots:
 
     void on_action_color_to_grey_triggered();
 
+    void on_action_histogram_equalization_triggered();
+
+    void on_action_inverse_color_triggered();
+
 private:
 //绘图事件处理，虚函数
     void paintEvent(QPaintEvent*);

@@ -132,3 +132,48 @@ void MainWindow::on_action_color_to_grey_triggered()
         QMessageBox::critical(this,"error","图片没打开");
     }
 }
+void MainWindow::on_action_inverse_color_triggered()
+{
+    if(isPicOpen){
+        //QPixmap pixmap(QPixmap::fromImage(curImage));
+        unsigned char* data =curImage.bits();
+
+        int width=curImage.width();
+        int height=curImage.height();
+        int bytePerLine=(width*24+31)/8;
+        //存储处理后的数据
+        unsigned char* inverseData=new unsigned char [bytePerLine*height];
+
+        unsigned char r,g,b;
+
+        for(int i=0;i<height;i++)
+        {
+            for(int j=0;j<width;j++)
+            {
+                r=*(data+2);
+                g=*(data+1);
+                b=*data;
+
+                inverseData[i*bytePerLine+j*3]=255-(int)b;
+                inverseData[i*bytePerLine+j*3+1]=255-int(g);
+                inverseData[i*bytePerLine+j*3+2]=255-int(r);
+
+                data+=4;
+
+            }
+        }
+        QImage inverseImage(inverseData,width,height,bytePerLine,QImage::Format_RGB888);
+        //QPixmap pixmap2(QPixmap::fromImage (greyImage));
+        curImage=inverseImage;
+        update();
+    }else {
+
+        QMessageBox::critical(this,"error","图片没打开");
+    }
+}
+void MainWindow::on_action_histogram_equalization_triggered()
+{
+
+}
+
+

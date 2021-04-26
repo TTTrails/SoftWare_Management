@@ -272,8 +272,8 @@
     <property name="title">
      <string>滤镜</string>
     </property>
-    <addaction name="reversecolor"/>
-    <addaction name="balanced"/>
+    <addaction name="action_inverse_color"/>
+    <addaction name="action_histogram_equalization"/>
     <addaction name="action_20"/>
     <addaction name="action_color_to_grey"/>
     <addaction name="action_grey_to_binary"/>
@@ -472,14 +472,20 @@
     <string>合并全部图层</string>
    </property>
   </action>
-  <action name="reversecolor">
+  <action name="action_inverse_color">
    <property name="text">
     <string>反色</string>
    </property>
   </action>
-  <action name="balanced">
+  <action name="action_histogram_equalization">
    <property name="text">
-    <string>直方图平衡</string>
+    <string>直方图均衡</string>
+   </property>
+   <property name="iconText">
+    <string>直方图均衡</string>
+   </property>
+   <property name="toolTip">
+    <string>直方图均衡</string>
    </property>
   </action>
   <action name="action_20">
