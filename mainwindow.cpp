@@ -14,8 +14,61 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+int MainWindow::YUVConvertToRGB(){
+    unsigned char* data =curImage.bits();
+    unsigned char* RGBData;
+    int width=curImage.width();
+    int height=curImage.height();
+    int bytePerLine=(width*24+31)/8;
+    //存储处理后的数据
+    RGBData=new unsigned char [bytePerLine*height];
+    //unsigned char r,g,b,y;
 
+    for(int i=0;i<height;i++)
+    {
+        for(int j=0;j<width;j++)
+        {
 
+        }
+    }
+    QImage RGBImage(RGBData,width,height,bytePerLine,QImage::Format_RGB888);
+    curImage=RGBImage;
+
+    return 0;
+}
+
+int MainWindow::RGBConvertToYUV(){
+    unsigned char* data =curImage.bits();
+    unsigned char* YUVData;
+    int width=curImage.width();
+    int height=curImage.height();
+    int bytePerLine=(width*24+31)/8;
+    //存储处理后的数据
+    YUVData=new unsigned char [bytePerLine*height];
+    unsigned char r,g,b,y;
+
+    for(int i=0;i<height;i++)
+    {
+        for(int j=0;j<width;j++)
+        {
+            r=*(data+2);
+            g=*(data+1);
+            b=*data;
+
+            y=YUVData[i * bytePerLine + j * 3]= 0.3*r + 0.59*g + 0.11*b;
+            YUVData[i*bytePerLine+j*3+1]=(0.87*(0.493*((int)b - y)) + 127);
+            YUVData[i*bytePerLine+j*3+2]=(0.8*(0.877*((int)r - y)) + 127);
+
+            data+=4;
+
+        }
+    }
+    QImage YUVImage(YUVData,width,height,bytePerLine,QImage::Format_RGB888);
+
+    curImage=YUVImage;
+
+    return 0;
+}
 
 
 void MainWindow::paintEvent(QPaintEvent *){
@@ -37,6 +90,11 @@ void MainWindow::paintEvent(QPaintEvent *){
 void MainWindow::on_action_openPic_triggered()
 {
     QString path = QFileDialog::getOpenFileName(this,"打开图片","C:\\");
+    if(path.isEmpty())
+    {
+        QMessageBox::warning(this,"未选择文件","请选择图片！");
+        return;
+     }
     //qDebug()<<path;
     filePath=path;
     //构建要绘制的图形对象
@@ -123,9 +181,9 @@ void MainWindow::on_action_color_to_grey_triggered()
 
             }
         }
-        QImage grayImage(greyData,width,height,bytePerLine,QImage::Format_RGB888);
+        QImage greyImage(greyData,width,height,bytePerLine,QImage::Format_RGB888);
         //QPixmap pixmap2(QPixmap::fromImage (greyImage));
-        curImage=grayImage;
+        curImage=greyImage;
         update();
     }else {
 
@@ -135,7 +193,7 @@ void MainWindow::on_action_color_to_grey_triggered()
 void MainWindow::on_action_inverse_color_triggered()
 {
     if(isPicOpen){
-        //QPixmap pixmap(QPixmap::fromImage(curImage));
+
         unsigned char* data =curImage.bits();
 
         int width=curImage.width();
@@ -163,7 +221,6 @@ void MainWindow::on_action_inverse_color_triggered()
             }
         }
         QImage inverseImage(inverseData,width,height,bytePerLine,QImage::Format_RGB888);
-        //QPixmap pixmap2(QPixmap::fromImage (greyImage));
         curImage=inverseImage;
         update();
     }else {
@@ -173,7 +230,8 @@ void MainWindow::on_action_inverse_color_triggered()
 }
 void MainWindow::on_action_histogram_equalization_triggered()
 {
-
+    RGBConvertToYUV();
+    update();
 }
 
 

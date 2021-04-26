@@ -22,6 +22,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+//RGB to YUV
+    int RGBConvertToYUV();
+    int YUVConvertToRGB();
 //自动生成的槽函数
 private slots:
     void on_action_openPic_triggered();
