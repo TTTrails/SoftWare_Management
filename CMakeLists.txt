@@ -32,6 +32,7 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        image.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

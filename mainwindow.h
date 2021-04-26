@@ -19,6 +19,8 @@ public:
 private slots:
     void on_action_openPic_triggered();
 
+    void on_action_grey_to_binary_triggered();
+
 private:
 //绘图事件处理，虚函数
     void paintEvent(QPaintEvent*);
@@ -27,5 +29,7 @@ private:
     Ui::MainWindow *ui;
 //文件路径
     QString filePath;
+//是否打开图片
+    bool isPicOpen;
 };
 #endif // MAINWINDOW_H
