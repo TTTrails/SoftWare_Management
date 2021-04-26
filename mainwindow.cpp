@@ -37,9 +37,10 @@ void MainWindow::paintEvent(QPaintEvent *){
 void MainWindow::on_action_openPic_triggered()
 {
     QString path = QFileDialog::getOpenFileName(this,"打开图片","C:\\");
-    qDebug()<<path;
+    //qDebug()<<path;
     filePath=path;
     //构建要绘制的图形对象
+    //QImage* image=new QImage(filePath);
     QImage image(filePath);
     if(image.isNull())
         qDebug()<<"open failed";
@@ -65,7 +66,7 @@ void MainWindow::on_action_grey_to_binary_triggered()
         {
             for (int j = 0; j < width; ++j)
             {
-                g = *(data + i * bytePerLine + j);
+                g = *(data + i * bytePerLine + j*3);
                 if(int(g) >= 128)
                 {
                     binarydata[ i * bytePerLine + j] = 0xFF;
