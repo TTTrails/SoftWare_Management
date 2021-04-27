@@ -33,6 +33,14 @@ set(PROJECT_SOURCES
         mainwindow.h
         mainwindow.ui
         image.qrc
+        ImageLayer.h
+        ImageLayer.cpp
+        ImageLayerManager.h
+        ImageLayerManager.cpp
+        ImageLayerFactory.h
+        ImageLayerObserver.h
+        ImageLayerObserver.cpp
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include"ImageLayerObserver.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -24,6 +24,7 @@ private slots:
 private:
 //绘图事件处理，虚函数
     void paintEvent(QPaintEvent*);
+    void mousePressEvent(QMouseEvent* event);
 
 private:
     Ui::MainWindow *ui;
@@ -31,5 +32,21 @@ private:
     QString filePath;
 //是否打开图片
     bool isPicOpen;
+
+private:
+    ImageLayerObserver* layerViewModel;
+
+private slots:
+    void UplayerItem();
+    void DownlayerItem();
+signals:
+    void AddNewLayer(QImage img);
+    void listUpdate(QListWidget* list);
+private:
+    void ShowBlendingImage();
+    void AddItemInList(ImageLayer* layer);
+    void RemoveLayer();
+    QListWidgetItem* CopyItem(QListWidgetItem *layer,int index);
+
 };
 #endif // MAINWINDOW_H
