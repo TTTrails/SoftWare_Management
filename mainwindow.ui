@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>803</width>
-    <height>728</height>
+    <height>750</height>
    </rect>
   </property>
   <property name="baseSize">
@@ -138,7 +138,7 @@
      <string/>
     </property>
     <property name="icon">
-     <iconset resource="image.qrc">
+     <iconset>
       <normaloff>:/images/up.png</normaloff>:/images/up.png</iconset>
     </property>
     <property name="iconSize">
@@ -171,7 +171,7 @@
      <string/>
     </property>
     <property name="icon">
-     <iconset resource="image.qrc">
+     <iconset>
       <normaloff>:/images/down.png</normaloff>:/images/down.png</iconset>
     </property>
     <property name="iconSize">
@@ -194,7 +194,7 @@
      <string/>
     </property>
     <property name="icon">
-     <iconset resource="image.qrc">
+     <iconset>
       <normaloff>:/images/del.png</normaloff>:/images/del.png</iconset>
     </property>
     <property name="iconSize">
@@ -228,7 +228,7 @@
      <x>0</x>
      <y>0</y>
      <width>803</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="file">
@@ -245,9 +245,9 @@
     <property name="title">
      <string>绘制</string>
     </property>
-    <addaction name="drawline"/>
-    <addaction name="drawcircle"/>
-    <addaction name="drawjuxing"/>
+    <addaction name="action_draw_line"/>
+    <addaction name="action_draw_ellipse"/>
+    <addaction name="action_draw_rectangle"/>
    </widget>
    <widget class="QMenu" name="edit">
     <property name="title">
@@ -304,9 +304,11 @@
    </attribute>
    <addaction name="separator"/>
    <addaction name="action_openPic"/>
-   <addaction name="drawline"/>
-   <addaction name="drawcircle"/>
-   <addaction name="drawjuxing"/>
+   <addaction name="action_draw_pencil"/>
+   <addaction name="action_draw_line"/>
+   <addaction name="action_draw_ellipse"/>
+   <addaction name="action_draw_rectangle"/>
+   <addaction name="action_draw_text"/>
    <addaction name="pingyi"/>
    <addaction name="xuanzhuan"/>
    <addaction name="suofang"/>
@@ -316,10 +318,11 @@
    <addaction name="down"/>
    <addaction name="delete_2"/>
    <addaction name="help"/>
+   <addaction name="separator"/>
   </widget>
   <action name="newproject">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/New Window.ico</normaloff>:/images/New Window.ico</iconset>
    </property>
    <property name="text">
@@ -328,7 +331,7 @@
   </action>
   <action name="openproject">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
    </property>
    <property name="text">
@@ -337,7 +340,7 @@
   </action>
   <action name="action_openPic">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/com.png</normaloff>:/images/com.png</iconset>
    </property>
    <property name="text">
@@ -347,7 +350,7 @@
   </action>
   <action name="saveproject">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/save.png</normaloff>:/images/save.png</iconset>
    </property>
    <property name="text">
@@ -356,35 +359,34 @@
   </action>
   <action name="saveas">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/saveas.png</normaloff>:/images/saveas.png</iconset>
    </property>
    <property name="text">
     <string>另存为图片</string>
    </property>
   </action>
-  <action name="drawline">
+  <action name="action_draw_line">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/line.png</normaloff>:/images/line.png</iconset>
    </property>
    <property name="text">
-    <string>画线
-</string>
+    <string>画直线 </string>
    </property>
   </action>
-  <action name="drawcircle">
+  <action name="action_draw_ellipse">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/circle.png</normaloff>:/images/circle.png</iconset>
    </property>
    <property name="text">
     <string>画椭圆</string>
    </property>
   </action>
-  <action name="drawjuxing">
+  <action name="action_draw_rectangle">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/juxing.png</normaloff>:/images/juxing.png</iconset>
    </property>
    <property name="text">
@@ -393,7 +395,7 @@
   </action>
   <action name="pingyi">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/move.png</normaloff>:/images/move.png</iconset>
    </property>
    <property name="text">
@@ -402,7 +404,7 @@
   </action>
   <action name="xuanzhuan">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/xuanzhuan.png</normaloff>:/images/xuanzhuan.png</iconset>
    </property>
    <property name="text">
@@ -411,7 +413,7 @@
   </action>
   <action name="suofang">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/suofang.png</normaloff>:/images/suofang.png</iconset>
    </property>
    <property name="text">
@@ -420,7 +422,7 @@
   </action>
   <action name="chexiao">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/undo.png</normaloff>:/images/undo.png</iconset>
    </property>
    <property name="text">
@@ -429,7 +431,7 @@
   </action>
   <action name="chongzuo">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/redo.png</normaloff>:/images/redo.png</iconset>
    </property>
    <property name="text">
@@ -438,7 +440,7 @@
   </action>
   <action name="up">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/up.png</normaloff>:/images/up.png</iconset>
    </property>
    <property name="text">
@@ -447,7 +449,7 @@
   </action>
   <action name="down">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/down.png</normaloff>:/images/down.png</iconset>
    </property>
    <property name="text">
@@ -456,7 +458,7 @@
   </action>
   <action name="delete_2">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/del.png</normaloff>:/images/del.png</iconset>
    </property>
    <property name="text">
@@ -465,7 +467,7 @@
   </action>
   <action name="hebing">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/combine.png</normaloff>:/images/combine.png</iconset>
    </property>
    <property name="text">
@@ -513,16 +515,24 @@
   </action>
   <action name="help">
    <property name="icon">
-    <iconset resource="image.qrc">
+    <iconset>
      <normaloff>:/images/help.png</normaloff>:/images/help.png</iconset>
    </property>
    <property name="text">
     <string>帮助</string>
    </property>
   </action>
+  <action name="action_draw_pencil">
+   <property name="text">
+    <string>铅笔</string>
+   </property>
+  </action>
+  <action name="action_draw_text">
+   <property name="text">
+    <string>文本</string>
+   </property>
+  </action>
  </widget>
- <resources>
-  <include location="image.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -33,6 +33,8 @@ set(PROJECT_SOURCES
         mainwindow.h
         mainwindow.ui
         image.qrc 
+        mypaint.cpp
+        mypaint.h
 
 )
 
