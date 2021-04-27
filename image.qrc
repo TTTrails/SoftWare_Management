@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/circle.png</file>
+        <file>images/com.png</file>
+        <file>images/combine.png</file>
+        <file>images/del.png</file>
+        <file>images/down.png</file>
+        <file>images/downist.png</file>
+        <file>images/help.png</file>
+        <file>images/huixingzhen.ico</file>
+        <file>images/invalid.png</file>
+        <file>images/juxing.png</file>
+        <file>images/line.png</file>
+        <file>images/move.png</file>
+        <file>images/New Window.ico</file>
+        <file>images/open.png</file>
+        <file>images/redo.png</file>
+        <file>images/save.png</file>
+        <file>images/saveas.png</file>
+        <file>images/SaveFile.ico</file>
+        <file>images/suofang.png</file>
+        <file>images/undo.png</file>
+        <file>images/up.png</file>
+        <file>images/upnist.png</file>
+        <file>images/xuanzhuan.png</file>
+    </qresource>
+</RCC>
