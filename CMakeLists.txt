@@ -32,9 +32,18 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        image.qrc 
+
+        image.qrc
+        ImageLayer.h
+        ImageLayer.cpp
+        ImageLayerManager.h
+        ImageLayerManager.cpp
+        ImageLayerFactory.h
+        ImageLayerObserver.h
+        ImageLayerObserver.cpp
         mypaint.cpp
         mypaint.h
+
 
 )
 

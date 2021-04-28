@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include"ImageLayerObserver.h"
 #include <QMainWindow>
 #include <QDialog>
 #include <QFileDialog>
@@ -52,6 +52,9 @@ private slots:
 
 private:
 //绘图事件处理，虚函数
+
+
+    void mousePressEvent(QMouseEvent* event);
     void paintEvent(QPaintEvent*);//重写窗体重绘事件
 
 
@@ -62,6 +65,23 @@ private:
     QString filePath;
 //是否打开图片
     bool isPicOpen;
+
+
+private:
+    ImageLayerObserver* layerViewModel;
+
+private slots:
+    void UplayerItem();
+    void DownlayerItem();
+signals:
+    void AddNewLayer(QImage img);
+    void listUpdate(QListWidget* list);
+private:
+    void ShowBlendingImage();
+    void AddItemInList(ImageLayer* layer);
+    void RemoveLayer();
+    QListWidgetItem* CopyItem(QListWidgetItem *layer,int index);
+
 //rect 区域
     QRect curRect;
 //显示的Qimage对象
@@ -71,6 +91,7 @@ private:
 
 //绘图类
     MyPaint* myPaint;
+
 
 
 };

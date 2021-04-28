@@ -1,6 +1,12 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+#include <QDialog>
+#include <QFileDialog>
+#include <QPainter>
+#include <QDebug>
+#include <QMessageBox>
+#include <QLabel>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)   
@@ -10,7 +16,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
 
-
+  
+    layerViewModel=new ImageLayerObserver();
+      
     //myPaint=new MyPaint(ui->frame);
     myPaint=new MyPaint(ui->centralwidget);
     //myPaint->stackUnder(ui->frame);
@@ -34,9 +42,19 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->action_draw_ellipse, SIGNAL(triggered()), myPaint, SLOT(Ellipses()));
     connect(ui->action_draw_line, SIGNAL(triggered()), myPaint, SLOT(Line()));
     connect(ui->action_draw_text, SIGNAL(triggered()), myPaint, SLOT(Texts()));
+      
+    //zyk的信号与槽连接  函数指针写法
+    connect(this,&MainWindow::AddNewLayer,layerViewModel,&ImageLayerObserver::OnAddLayer);
+    connect(layerViewModel,&ImageLayerObserver::NewLayer,this,&MainWindow::AddItemInList);
+    connect(this,&MainWindow::listUpdate,layerViewModel,&ImageLayerObserver::OnIndexUpdate);
+    connect(ui->up,&QAction::triggered,this,&MainWindow::UplayerItem);
+    connect(ui->down,&QAction::triggered,this,&MainWindow::DownlayerItem);
+    connect(ui->delete_2,&QAction::triggered,this,&MainWindow::RemoveLayer);  
+      
 
 
 }
+
 
 MainWindow::~MainWindow()
 {
@@ -107,6 +125,73 @@ int MainWindow::RGBConvertToYUV(){
 
 void MainWindow::paintEvent(QPaintEvent *){
 
+    ShowBlendingImage();
+//    //1 创建画家对象
+//    QPainter painter(this);
+//    //2 获取绘图所在矩形区域，当前是在frame窗口
+
+//    QRect rect = ui->frame->frameRect();
+
+
+
+//    //坐标值平移，让rect和painter使用相同的坐标系,在这个ui设计中会有很多的问题
+//    rect.translate(ui->centralwidget->pos()+ui->frame->pos());
+
+
+//    //3 构建要绘制的图形对象
+//    QImage image(filePath);
+//    if(image.isNull())
+//        qDebug()<<"open failed";
+//    else{
+//        isPicOpen=true;
+//    }
+//    //4 使用painter将image图片画到rect
+//    painter.drawImage(rect,image);
+
+
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    ui->frame->repaint();
+}
+
+void MainWindow::UplayerItem()
+{
+    int index1 = ui->listWidget->currentRow();
+    if(index1 == 0)
+        return;
+    else
+    {
+        QListWidgetItem *item =CopyItem(ui->listWidget->currentItem(),index1-1);
+        ui->listWidget->takeItem(index1+1);
+        ui->listWidget->setCurrentRow(index1);
+        ui->listWidget->show();
+        emit listUpdate(ui->listWidget);
+    }
+
+}
+
+void MainWindow::DownlayerItem()
+{
+    int index1 = ui->listWidget->currentRow();
+    if(index1 == (ui->listWidget->count()-1))
+        return;
+    else
+    {
+        QListWidgetItem *item =CopyItem(ui->listWidget->currentItem(),index1+2);
+        ui->listWidget->takeItem(index1);
+        ui->listWidget->setCurrentRow(index1);
+        ui->listWidget->show();
+        emit listUpdate(ui->listWidget);
+    }
+
+}
+
+void MainWindow::ShowBlendingImage()
+{
+
+
 //    QPixmap pix;
 //    pix.load(filePath);//加载图片
 //    QPainter painter(&myPaint->_pixmap);
@@ -124,26 +209,12 @@ void MainWindow::paintEvent(QPaintEvent *){
 
     //使用painter将image图片画到rect
     //painter.drawImage(rect,curImage);
-    painter.drawImage(rect,curImage);
 
 
-
-
-
-
-
-//    //试一试在frame_draw上画
-//    QPainter painter_draw(myPaint);
-//    //QImage 绘图
-//    QImage img(300,300,QImage::Format_RGB32);
-//    img.fill(Qt::white);
-//    painter.setPen(QPen(Qt::blue));
-//    painter.drawRect(myPaint->rect());
-
-
-
-
+    //4 使用painter将image图片画到rect
+    painter.drawImage(rect,ImageLayerManager::getImageLayerManager().BlendAllLayers());
 }
+
 
 void MainWindow::on_action_openPic_triggered()
 {
@@ -164,8 +235,84 @@ void MainWindow::on_action_openPic_triggered()
         isPicOpen=true;
         curImage=image;
     }
-
+  
+    //zyk
+    emit AddNewLayer(QImage(filePath));
 }
+
+
+void MainWindow::AddItemInList(ImageLayer* layer)
+{
+    QListWidget *LayerList=ui->listWidget;
+    QListWidgetItem *item=new QListWidgetItem(LayerList,0);
+
+    item->setSizeHint(QSize(100,100));
+    QWidget *w = new QWidget(LayerList);
+    QHBoxLayout *layout=new QHBoxLayout(w);
+    QLabel *label=new QLabel(w);
+    label->setText(layer->getLayerName());
+    QLabel *img=new QLabel(w);
+    img->clear();
+    QPixmap picture=QPixmap::fromImage(layer->getMainImage());
+    img->setScaledContents(true);
+    img->setPixmap(picture);
+    picture.scaled(img->size(), Qt::KeepAspectRatio);
+    layout->addWidget(img);
+    layout->addWidget(label);
+    w->setLayout(layout);
+    w->show();
+    LayerList->setItemWidget(item,w);
+    LayerList->show();
+    emit listUpdate(ui->listWidget);
+}
+void MainWindow::RemoveLayer()
+{
+    int row = ui->listWidget->currentRow();
+    layerViewModel->OnRemoveLayer(row);
+    ui->listWidget->takeItem(row);
+    emit listUpdate(ui->listWidget);
+}
+
+QListWidgetItem* MainWindow::CopyItem(QListWidgetItem *layer,int index)
+{
+    QString name;
+    QPixmap image;
+    QWidget* wig=ui->listWidget->itemWidget(layer);
+    if(wig!=nullptr){
+        QList<QLabel*> labelList=wig->findChildren<QLabel*>();
+        foreach(QLabel *label,labelList){
+            if(label->pixmap().isNull()){
+                name=label->text();
+            }
+            else{
+                image=label->pixmap();
+            }
+        }
+    }
+    QListWidgetItem *item=new QListWidgetItem();
+    ui->listWidget->insertItem(index,item);
+    item->setSizeHint(QSize(100,100));
+    QWidget *w = new QWidget(ui->listWidget);
+    QHBoxLayout *layout=new QHBoxLayout(w);
+    QLabel *label=new QLabel(w);
+    label->setText(name);
+    QLabel *img=new QLabel(w);
+    img->clear();
+    img->setScaledContents(true);
+    img->setPixmap(image);
+    image.scaled(img->size(), Qt::KeepAspectRatio);
+    layout->addWidget(img);
+    layout->addWidget(label);
+    w->setLayout(layout);
+    w->show();
+    ui->listWidget->setItemWidget(item,w);
+    return item;
+}
+
+
+
+
+
 
 void MainWindow::on_action_grey_to_binary_triggered()
 {
@@ -205,7 +352,7 @@ void MainWindow::on_action_grey_to_binary_triggered()
     }
 
 
-}
+
 
 
 
