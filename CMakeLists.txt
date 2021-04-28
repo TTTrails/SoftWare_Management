@@ -32,6 +32,7 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+
         image.qrc
         ImageLayer.h
         ImageLayer.cpp
@@ -40,6 +41,9 @@ set(PROJECT_SOURCES
         ImageLayerFactory.h
         ImageLayerObserver.h
         ImageLayerObserver.cpp
+        mypaint.cpp
+        mypaint.h
+
 
 )
 
