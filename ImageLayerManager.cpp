@@ -17,6 +17,7 @@ QImage ImageLayerManager::BlendAllLayers(){
 
     QImage oldImg1,oldImg2;
     oldImg1=layers->at(0)->getMainImage();
+    //qDebug()<<"oldImg Size:"<<oldImg1.size();
     if(layers->size()==1){
         return oldImg1;
     }

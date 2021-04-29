@@ -41,10 +41,6 @@ set(PROJECT_SOURCES
         ImageLayerFactory.h
         ImageLayerObserver.h
         ImageLayerObserver.cpp
-        mypaint.cpp
-        mypaint.h
-
-
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
