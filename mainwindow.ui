@@ -23,203 +23,182 @@
    <property name="enabled">
     <bool>true</bool>
    </property>
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>781</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="1" colspan="3">
+     <widget class="QListWidget" name="listWidget"/>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="button_upLayer">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="image.qrc">
+        <normaloff>:/images/up.png</normaloff>:/images/up.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>30</width>
+        <height>30</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="button_downLayer">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="image.qrc">
+        <normaloff>:/images/down.png</normaloff>:/images/down.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>30</width>
+        <height>30</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="3">
+     <widget class="QPushButton" name="button_removeLayer">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="image.qrc">
+        <normaloff>:/images/del.png</normaloff>:/images/del.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>30</width>
+        <height>30</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="4">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>0</width>
+          <height>5</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="horizontalSlider">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox">
+        <item>
+         <property name="text">
+          <string>无描边</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>实线</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>虚线</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>点线</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>点划线</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_2"/>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0" rowspan="2">
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>521</width>
+         <height>600</height>
+        </rect>
        </property>
-       <property name="baseSize">
-        <size>
-         <width>0</width>
-         <height>5</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QSlider" name="horizontalSlider">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboBox">
-       <item>
-        <property name="text">
-         <string>无描边</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>实线</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>虚线</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>点线</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>点划线</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="baseSize">
-        <size>
-         <width>60</width>
-         <height>60</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboBox_2"/>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>80</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>:/images/up.png</normaloff>:/images/up.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QListWidget" name="listWidget">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>120</y>
-      <width>261</width>
-      <height>521</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>80</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>:/images/down.png</normaloff>:/images/down.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_5">
-    <property name="geometry">
-     <rect>
-      <x>710</x>
-      <y>80</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>:/images/del.png</normaloff>:/images/del.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QFrame" name="frame">
-    <property name="geometry">
-     <rect>
-      <x>9</x>
-      <y>79</y>
-      <width>511</width>
-      <height>561</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Box</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Sunken</enum>
-    </property>
-   </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
@@ -228,7 +207,7 @@
      <x>0</x>
      <y>0</y>
      <width>803</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="file">
@@ -245,9 +224,6 @@
     <property name="title">
      <string>绘制</string>
     </property>
-    <addaction name="action_draw_line"/>
-    <addaction name="action_draw_ellipse"/>
-    <addaction name="action_draw_rectangle"/>
    </widget>
    <widget class="QMenu" name="edit">
     <property name="title">
@@ -263,9 +239,6 @@
     <property name="title">
      <string>图层</string>
     </property>
-    <addaction name="up"/>
-    <addaction name="down"/>
-    <addaction name="delete_2"/>
     <addaction name="hebing"/>
    </widget>
    <widget class="QMenu" name="camera">
@@ -286,11 +259,11 @@
     <addaction name="help"/>
    </widget>
    <addaction name="file"/>
-   <addaction name="draw"/>
    <addaction name="edit"/>
    <addaction name="picture"/>
    <addaction name="camera"/>
    <addaction name="about"/>
+   <addaction name="draw"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
@@ -305,24 +278,18 @@
    <addaction name="separator"/>
    <addaction name="action_openPic"/>
    <addaction name="action_draw_pencil"/>
-   <addaction name="action_draw_line"/>
-   <addaction name="action_draw_ellipse"/>
-   <addaction name="action_draw_rectangle"/>
    <addaction name="action_draw_text"/>
    <addaction name="pingyi"/>
    <addaction name="xuanzhuan"/>
    <addaction name="suofang"/>
    <addaction name="chexiao"/>
    <addaction name="chongzuo"/>
-   <addaction name="up"/>
-   <addaction name="down"/>
-   <addaction name="delete_2"/>
    <addaction name="help"/>
    <addaction name="separator"/>
   </widget>
   <action name="newproject">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/images/New Window.ico</normaloff>:/images/New Window.ico</iconset>
    </property>
    <property name="text">
@@ -331,7 +298,7 @@
   </action>
   <action name="openproject">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
    </property>
    <property name="text">
@@ -340,7 +307,7 @@
   </action>
   <action name="action_openPic">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/images/com.png</normaloff>:/images/com.png</iconset>
    </property>
    <property name="text">
@@ -350,7 +317,7 @@
   </action>
   <action name="saveproject">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/images/save.png</normaloff>:/images/save.png</iconset>
    </property>
    <property name="text">
@@ -359,43 +326,16 @@
   </action>
   <action name="saveas">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/images/saveas.png</normaloff>:/images/saveas.png</iconset>
    </property>
    <property name="text">
     <string>另存为图片</string>
    </property>
   </action>
-  <action name="action_draw_line">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/images/line.png</normaloff>:/images/line.png</iconset>
-   </property>
-   <property name="text">
-    <string>画直线 </string>
-   </property>
-  </action>
-  <action name="action_draw_ellipse">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/images/circle.png</normaloff>:/images/circle.png</iconset>
-   </property>
-   <property name="text">
-    <string>画椭圆</string>
-   </property>
-  </action>
-  <action name="action_draw_rectangle">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/images/juxing.png</normaloff>:/images/juxing.png</iconset>
-   </property>
-   <property name="text">
-    <string>画矩形</string>
-   </property>
-  </action>
   <action name="pingyi">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/images/move.png</normaloff>:/images/move.png</iconset>
    </property>
    <property name="text">
@@ -404,7 +344,7 @@
   </action>
   <action name="xuanzhuan">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/images/xuanzhuan.png</normaloff>:/images/xuanzhuan.png</iconset>
    </property>
    <property name="text">
@@ -413,7 +353,7 @@
   </action>
   <action name="suofang">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/images/suofang.png</normaloff>:/images/suofang.png</iconset>
    </property>
    <property name="text">
@@ -422,7 +362,7 @@
   </action>
   <action name="chexiao">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/images/undo.png</normaloff>:/images/undo.png</iconset>
    </property>
    <property name="text">
@@ -431,43 +371,16 @@
   </action>
   <action name="chongzuo">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/images/redo.png</normaloff>:/images/redo.png</iconset>
    </property>
    <property name="text">
     <string>重做</string>
    </property>
   </action>
-  <action name="up">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/images/up.png</normaloff>:/images/up.png</iconset>
-   </property>
-   <property name="text">
-    <string>上移图层</string>
-   </property>
-  </action>
-  <action name="down">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/images/down.png</normaloff>:/images/down.png</iconset>
-   </property>
-   <property name="text">
-    <string>下移图层</string>
-   </property>
-  </action>
-  <action name="delete_2">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/images/del.png</normaloff>:/images/del.png</iconset>
-   </property>
-   <property name="text">
-    <string>删除图层</string>
-   </property>
-  </action>
   <action name="hebing">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/images/combine.png</normaloff>:/images/combine.png</iconset>
    </property>
    <property name="text">
@@ -515,7 +428,7 @@
   </action>
   <action name="help">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/images/help.png</normaloff>:/images/help.png</iconset>
    </property>
    <property name="text">
@@ -533,6 +446,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="image.qrc"/>
+ </resources>
  <connections/>
 </ui>
