@@ -17,10 +17,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-
-
     ui->label->installEventFilter(this);//在label中添加事件过滤器
-    ui->scrollAreaWidgetContents->setMinimumSize(QSize(1980, 1080));
+
+    ui->scrollAreaWidgetContents->setMinimumSize(QSize(1920, 1080));
+
     //画图功能
     isPicOpen = false; //初始未打开图片
     lpress = false;//初始鼠标左键未按下
@@ -141,7 +141,7 @@ void MainWindow::GenerateDrawImage(){
 
         //QPixmap pix = pixmap;//以_pixmap作为画布
 
-        QImage img(300,300,QImage::Format_RGB32);
+        QImage img(1920,1080,QImage::Format_RGB32);
         img.fill(Qt::white);
         QPainter painter(&img);
 
@@ -242,7 +242,7 @@ void MainWindow::on_action_openPic_triggered()
 
     QImage image(filePath);
 
-    //image=image.scaled(1920,1080,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
+    image=image.scaled(1920,1080,Qt::KeepAspectRatio,Qt::FastTransformation);
     //qDebug()<<"Image Size:"<<image.size();
     if(image.isNull())
         qDebug()<<"open failed";
@@ -673,6 +673,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)
 
         }
         GenerateDrawImage();
+        drawType=0;
     }
 }
 
