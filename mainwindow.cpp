@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     ui->label->installEventFilter(this);//在label中添加事件过滤器
-    ui->scrollAreaWidgetContents->setMinimumSize(QSize(400, 400));
+    ui->scrollAreaWidgetContents->setMinimumSize(QSize(1980, 1080));
     //画图功能
     isPicOpen = false; //初始未打开图片
     lpress = false;//初始鼠标左键未按下
