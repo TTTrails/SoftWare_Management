@@ -1,74 +1,60 @@
-# This file is used to ignore files which are generated
-# ----------------------------------------------------------------------------
+# C++ objects and libs
 
-*~
-*.autosave
-*.a
-*.core
-*.moc
+*.slo
+*.lo
 *.o
-*.obj
-*.orig
-*.rej
+*.a
+*.la
+*.lai
 *.so
-*.so.*
-*_pch.h.cpp
-*_resource.rc
-*.qm
-.#*
-*.*#
-core
-!core/
-tags
-.DS_Store
-.directory
-*.debug
-Makefile*
-*.prl
-*.app
-moc_*.cpp
-ui_*.h
-qrc_*.cpp
-Thumbs.db
-*.res
-*.rc
+*.dll
+*.dylib
+
+# Qt-es
+
 /.qmake.cache
 /.qmake.stash
-
-# qtcreator generated files
-*.pro.user*
-CMakeLists.txt.user.*
-
-# xemacs temporary files
-*.flc
-
-# Vim temporary files
-.*.swp
-
-# Visual Studio generated files
-*.ib_pdb_index
-*.idb
-*.ilk
-*.pdb
-*.sln
-*.suo
-*.vcproj
-*vcproj.*.*.user
-*.ncb
-*.sdf
-*.opensdf
-*.vcxproj
-*vcxproj.*
-
-# MinGW generated files
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+Makefile*
+*build-*
+*.depends
+*_plugin_import.cpp
 *.Debug
+*moc.cpp
 *.Release
 
-# Python byte code
-*.pyc
+# QtCreator
 
-# Binaries
-# --------
-*.dll
-*.exe
+*.autosave
 
+# QtCtreator Qml
+*.qmlproject.user
+*.qmlproject.user.*
+
+# QtCtreator CMake
+CMakeLists.txt.user*
+
+# Clion
+.idea
+cmake-build-debug
+bin/
+
+### CMake template
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+build.sh
