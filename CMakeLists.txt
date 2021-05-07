@@ -36,7 +36,7 @@ set(LIBRARIES
 qt5_wrap_ui(UIC_SOURCES ${FORMS})
 qt5_add_resources(RCC_SOURCES ${RESOURCES})
 
-add_executable(MiniPhotoShop
+add_executable(LittlePhotoShop
         ${SOURCE_FILES}
         ${UI_HEADERS}
         ${UIC_SOURCES}
