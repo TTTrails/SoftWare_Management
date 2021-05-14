@@ -756,6 +756,39 @@ void Model::DeleteLayout(int LayoutIndex){
          pic->ConvertFormat(PIXMAP::FMT_BIN,ints[1]);
          pic->ConvertFormat(PIXMAP::FMT_RGB);
          break;
+    case PIXMAP::NOSTALGIC:
+         pic->Nostalgic();
+         break;
+    case PIXMAP::FLEETING:
+         pic->Fleeting();
+         break;
+    case PIXMAP::LIGHTING:
+         pic->Lighting(ints[1],ints[2],ints[3],ints[4]);
+         break;
+    case PIXMAP::BUILDINGBLOCK:
+         pic->BuildingBlock();
+         break;
+    case PIXMAP::COMIC:
+         pic->Comic();
+         break;
+    case PIXMAP::LOWLIGHT:
+         pic->LowLight();
+         break;
+    case PIXMAP::CASTING:
+         pic->Casting();
+         break;
+    case PIXMAP::NEONLIGHT:
+         pic->NeonLight();
+         break;
+    case PIXMAP::EXPOSAL:
+         pic->Exposal();
+         break;
+    case PIXMAP::FREEZING:
+         pic->Freezing();
+         break;
+    case PIXMAP::OILPAINT:
+         pic->OilPaint();
+         break;
      default:
          return;
          break;

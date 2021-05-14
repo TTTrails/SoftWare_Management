@@ -718,6 +718,386 @@ shared_ptr<Pixmap> Pixmap::BilateralFiltering(int filterSize,double intenPara,do
     return res;
 }
 
+
+//综合图像处理特效
+//怀旧特效
+int Pixmap::Nostalgic(){
+    if (format == FMT_NULL)
+        return 1;
+    int yuvFlag = 0;
+    if (format == FMT_YUV)
+    {
+        yuvFlag = 1;
+        ConvertToRGB();
+    }
+    UNUM8 *pr = r, *pg = g, *pb = b,cr, cg, cb;
+    int ar,ag,ab;
+    for (unsigned int i = 0; i < width*height; i++)
+    {
+        cr=*pr;
+        cg=*pg;
+        cb=*pb;
+
+        ar = static_cast<int>(0.39*cr +0.77*cg+0.19*cb);
+        ag = static_cast<int>(0.35*cr + 0.69*cg +0.17*cb);
+        ab = static_cast<int>(0.27*cr +0.53*cg +0.13*cb);
+
+        *pr++ = ar>255?255:ar;
+        *pg++ = ag>255?255:ag;
+        *pb++ = ab>255?255:ab;
+
+    }
+    if (yuvFlag)
+        ConvertToYUV();
+    return 0;
+}
+
+//流年特效
+int Pixmap::Fleeting(){
+    if (format == FMT_NULL)
+        return 1;
+    int yuvFlag = 0;
+    if (format == FMT_YUV)
+    {
+        yuvFlag = 1;
+        ConvertToRGB();
+    }
+    UNUM8 *pb = b, cb;
+    int ab;
+    for (unsigned int i = 0; i < width*height; i++)
+    {
+        cb=*pb;
+        ab=sqrt(cb)*12;
+        *pb++ = ab>255?255:ab;
+    }
+    if (yuvFlag)
+        ConvertToYUV();
+    return 0;
+}
+
+//光照特效(稍微复杂一点点)
+int Pixmap::Lighting(int centerX,int centerY,int radius,int strength){
+    if (format == FMT_NULL)
+        return 1;
+    int yuvFlag = 0;
+    if (format == FMT_YUV)
+    {
+        yuvFlag = 1;
+        ConvertToRGB();
+    }
+
+    //设置光照中心和光照半径，这里先默认是图片中心
+    //int centerX = height / 2 ,
+            //centerY = width / 2 ,
+            //光照范围由半径调节
+            //radius = min(centerX, centerY)/10;
+
+    //设置光照强度
+    //int strength = 200;
+    //各种参数
+    int distance,result,cr,cg,cb;
+    UNUM8 *pr = r, *pg = g, *pb = b;
+
+    for(int x=0;x<height;x++)
+        for(int y=0;y<width;y++)
+        {
+            //计算当前点到光照中心距离(平面坐标系中两点之间的距离)
+            distance = pow((centerY-y), 2) + pow((centerX-x), 2);
+
+            result=0;
+            if (distance < radius * radius){
+                //按照距离大小计算增强的光照值
+                result = static_cast<unsigned int>(strength*( 1.0 - sqrt(distance) / radius ));
+            }
+            cr=*pr+result;
+            cg=*pg+result;
+            cb=*pb+result;
+            *pr++ = cr>255?255:cr;
+            *pg++ = cg>255?255:cg;
+            *pb++ = cb>255?255:cb;
+
+        }
+
+    if (yuvFlag)
+        ConvertToYUV();
+    return 0;
+
+}
+
+//积木特效
+int Pixmap::BuildingBlock(){
+    if (format == FMT_NULL)
+        return 1;
+    int yuvFlag = 0;
+    if (format == FMT_YUV)
+    {
+        yuvFlag = 1;
+        ConvertToRGB();
+    }
+    UNUM8 *pr = r, *pg = g, *pb = b;
+    int cr, cg, cb,avg;
+    for (unsigned int i = 0; i < width*height; i++)
+    {
+        cr=*pr;
+        cg=*pg;
+        cb=*pb;
+        avg=(cr+cg+cb)/3;
+        *pr++ = avg>127?255:0;
+        *pg++ = avg>127?255:0;
+        *pb++ = avg>127?255:0;
+
+    }
+    if (yuvFlag)
+        ConvertToYUV();
+    return 0;
+}
+
+
+//连环画特效
+int Pixmap::Comic(){
+    if (format == FMT_NULL)
+        return 1;
+    int yuvFlag = 0;
+    if (format == FMT_YUV)
+    {
+        yuvFlag = 1;
+        ConvertToRGB();
+    }
+    UNUM8 *pr = r, *pg = g, *pb = b;
+     int cr, cg, cb,tr,tg,tb;
+    for (unsigned int i = 0; i < width*height; i++)
+    {
+        cr=*pr;
+        cg=*pg;
+        cb=*pb;
+        tb =int(abs(2*cb-cg+cr)*cr) >> 8;
+        tg =int(abs(2*cb-cg+cr)*cg) >> 8;
+        tr =int(abs(2*cg-cb+cr)*cr) >> 8;
+        int gray = (tb + tg + tr)/3;
+        gray=gray>245?245:gray;
+
+
+        *pr++ = gray+10;
+        *pg++ = gray+10;
+        *pb++ = gray;
+
+    }
+    if (yuvFlag)
+        ConvertToYUV();
+    return 0;
+}
+
+//暗调滤镜
+int Pixmap::LowLight(){
+    if (format == FMT_NULL)
+        return 1;
+    int yuvFlag = 0;
+    if (format == FMT_YUV)
+    {
+        yuvFlag = 1;
+        ConvertToRGB();
+    }
+    UNUM8 *pr = r, *pg = g, *pb = b;
+    int cr, cg, cb;
+    for (unsigned int i = 0; i < width*height; i++)
+    {
+        cr=*pr;
+        cg=*pg;
+        cb=*pb;
+
+        *pr++ = cr*cr/255;
+        *pg++ = cg*cg/255;
+        *pb++ = cb*cb/255;
+
+    }
+    if (yuvFlag)
+        ConvertToYUV();
+    return 0;
+}
+
+//熔铸特效
+int Pixmap::Casting(){
+    if (format == FMT_NULL)
+        return 1;
+    int yuvFlag = 0;
+    if (format == FMT_YUV)
+    {
+        yuvFlag = 1;
+        ConvertToRGB();
+    }
+    UNUM8 *pr = r, *pg = g, *pb = b;
+    int cr, cg, cb,ar,ag,ab;
+    for (unsigned int i = 0; i < width*height; i++)
+    {
+        cr=*pr;
+        cg=*pg;
+        cb=*pb;
+        ar=cr*128/(cg+cb+1);
+        ag=cg*128/(cr+cb+1);
+        ab=cb*128/(cr+cg+1);
+        *pr++ = (ar>255 ? 255 : (ar<0? -ar : ar));
+        *pg++ = (ag>255 ? 255 : (ag<0? -ag : ag));
+        *pb++ = (ab>255 ? 255 : (ab<0? -ab : ab));
+
+
+    }
+    if (yuvFlag)
+        ConvertToYUV();
+    return 0;
+}
+
+//霓虹特效
+int Pixmap::NeonLight(){
+    if (format == FMT_NULL)
+        return 1;
+    int yuvFlag = 0;
+    if (format == FMT_YUV)
+    {
+        yuvFlag = 1;
+        ConvertToRGB();
+    }
+    UNUM8 *pr = r, *pg = g, *pb = b;
+    //涉及综合处理的地方需要小心咯
+    int cr, cg, cb,ar,ag,ab;
+    int r1,g1,b1,r2,g2,b2;
+    for (unsigned int i = 0; i < height; i++)
+        for(unsigned int j = 0;j < width; j++)
+        {
+            if(i==height-1||j==width-1)
+            {
+                pr++;
+                pg++;
+                pb++;
+                continue;
+            }
+            //当前点的rgb
+            cr=*pr;
+            cg=*pg;
+            cb=*pb;
+            //同行相邻点的rgb
+            r1=*(pr+1);
+            g1=*(pg+1);
+            b1=*(pb+1);
+            //同列相邻点的rgb
+            r2=*(pr+width);
+            g2=*(pg+width);
+            b2=*(pb+width);
+
+            ar=2*sqrt(pow(cr-r1,2)+pow(cr-r2,2));
+            ag=2*sqrt(pow(cg-g1,2)+pow(cg-g2,2));
+            ab=2*sqrt(pow(cb-b1,2)+pow(cb-b2,2));
+
+            *pr++ = ar>255?255:ar;
+            *pg++ = ag>255?255:ag;
+            *pb++ = ab>255?255:ab;
+
+
+        }
+
+    if (yuvFlag)
+        ConvertToYUV();
+    return 0;
+}
+
+//曝光特效
+int Pixmap::Exposal(){
+    if (format == FMT_NULL)
+        return 1;
+    int yuvFlag = 0;
+    if (format == FMT_YUV)
+    {
+        yuvFlag = 1;
+        ConvertToRGB();
+    }
+    UNUM8 *pr = r, *pg = g, *pb = b;
+    int cr, cg, cb;
+    for (unsigned int i = 0; i < width*height; i++)
+    {
+        cr=*pr;
+        cg=*pg;
+        cb=*pb;
+
+        *pr++ = cr<128?(255-cr):cr;
+        *pg++ = cg<128?(255-cg):cg;
+        *pb++ = cg<128?(255-cg):cg;
+    }
+    if (yuvFlag)
+        ConvertToYUV();
+    return 0;
+
+}
+
+//冰冻特效
+//为什么效果会有问题，实现确认是没有问题的
+int Pixmap::Freezing(){
+    if (format == FMT_NULL)
+        return 1;
+    int yuvFlag = 0;
+    if (format == FMT_YUV)
+    {
+        yuvFlag = 1;
+        ConvertToRGB();
+    }
+    UNUM8 *pr = r, *pg = g, *pb = b;
+    int cr, cg, cb,ar,ag,ab;
+    for (unsigned int i = 0; i < width*height; i++)
+    {
+        cr=*pr;
+        cg=*pg;
+        cb=*pb;
+
+        ab = (cb-cg-cr)*3/2;
+        ag = (cg-cb-cr)*3/2;
+        ar = (cr-cg-cb)*3/2;
+
+        *pr++ = (ar>255 ? 255 : (ar<0? -ar : ar));
+        *pg++ = (ag>255 ? 255 : (ag<0? -ag : ag));
+        *pb++ = (ab>255 ? 255 : (ab<0? -ab : ab));
+
+
+    }
+    if (yuvFlag)
+        ConvertToYUV();
+    return 0;
+
+}
+
+
+//油画特效
+int Pixmap::OilPaint(){
+    if (format == FMT_NULL)
+        return 1;
+    int yuvFlag = 0;
+    if (format == FMT_YUV)
+    {
+        yuvFlag = 1;
+        ConvertToRGB();
+    }
+    UNUM8 *pr = r, *pg = g, *pb = b;
+    //int cr, cg, cb,ar,ag,ab;
+    for(int x=1;x<height-2;x++)
+        for(int y=0;y<width;y++){
+            if(rand()%3==0){
+                *(pr+x*width+y)=*(pr+(x-1)*width+y);
+                *(pg+x*width+y)=*(pg+(x-1)*width+y);
+                *(pb+x*width+y)=*(pb+(x-1)*width+y);
+
+            }else if(rand()%2==0){
+                *(pr+x*width+y)=*(pr+(x+1)*width+y);
+                *(pg+x*width+y)=*(pg+(x+1)*width+y);
+                *(pb+x*width+y)=*(pb+(x+1)*width+y);
+
+            }else {
+                *(pr+x*width+y)=*(pr+(x+2)*width+y);
+                *(pg+x*width+y)=*(pg+(x+2)*width+y);
+                *(pb+x*width+y)=*(pb+(x+2)*width+y);
+            }
+        }
+    if (yuvFlag)
+        ConvertToYUV();
+    return 0;
+}
+
 //----------------------------Pixmap End-----------------------------//
 //----------------------------histogram begin------------------------//
 
