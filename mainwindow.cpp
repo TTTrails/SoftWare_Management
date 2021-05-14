@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
 
-    ui->label->installEventFilter(this);
+    ui->label->installEventFilter(this);//在label‘中添加事件过滤器
     layerViewModel=new ImageLayerObserver();
     connect(this,&MainWindow::AddNewLayer,layerViewModel,&ImageLayerObserver::OnAddLayer);
     connect(layerViewModel,&ImageLayerObserver::NewLayer,this,&MainWindow::AddItemInList);
@@ -38,11 +38,10 @@ MainWindow::~MainWindow()
 bool MainWindow::eventFilter(QObject *watched, QEvent *event)   //用过滤器eventFilter（）拦截QLabel中的QEvent::Paint事件
 {
     if(watched ==ui->label && event->type() == QEvent::Paint)
-        ShowBlendingImage();
+        paint();
 
     return QWidget::eventFilter(watched,event);
 }
-
 
 void MainWindow::paint(){//重新构建paint函数
     ShowBlendingImage();
@@ -113,7 +112,7 @@ void MainWindow::ShowBlendingImage()
     //1 创建画家对象
     QPainter painter(ui->label);
     //2 获取绘图所在矩形区域，当前是在label窗口
-    ui->label->setPixmap(QPixmap::fromImage(ImageLayerManager::getImageLayerManager().BlendAllLayers()));//在label中显示图片
+    ui->label->setPixmap(QPixmap::fromImage(ImageLayerManager::getImageLayerManager().BlendAllLayers()));//在label中显示图片,实际功能是重设label的大小让label出现滚动条,
     //QRect rect = ui->label->frameRect();
 
 
@@ -124,6 +123,7 @@ void MainWindow::ShowBlendingImage()
 
     //4 使用painter将image图片画到label
     painter.drawPixmap(0,0,QPixmap::fromImage(ImageLayerManager::getImageLayerManager().BlendAllLayers()));
+    ui->label->resize(1920,1080);
 }
 
 void MainWindow::AddItemInList(ImageLayer* layer)
