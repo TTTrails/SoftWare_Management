@@ -455,6 +455,21 @@ public:
     shared_ptr<Pixmap> LaplacianEnhance(double * filter=NULL, unsigned int filterSize=0) ;	//拉普拉斯图像增强
     shared_ptr<Pixmap> BilateralFiltering(int filterSize=-1,double intenPara=-1,double spacePara=-1) ;//双边滤波
 
+    //综合图像处理特效
+
+
+    int Nostalgic();//怀旧特效
+    int Fleeting(); //流年特效
+    int Lighting(int centerX,int centerY,int radius,int strength); //光照特效
+    int BuildingBlock();//积木特效
+    int Comic();//连环画滤镜
+    int LowLight();//暗调特效
+    int Casting();//熔铸特效
+    int NeonLight();//霓虹特效
+    int Exposal();//曝光特效
+    int Freezing();//冰冻特效
+    int OilPaint();//油画特效
+
 
     const unsigned char *getRHead() const { return r; }	//返回r数组
     const unsigned char *getGHead() const { return g; }	//返回g数组

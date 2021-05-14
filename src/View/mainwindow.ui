@@ -140,8 +140,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>822</width>
-           <height>822</height>
+           <width>818</width>
+           <height>818</height>
           </rect>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -263,7 +263,7 @@
      <x>0</x>
      <y>0</y>
      <width>913</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -325,11 +325,28 @@
     <addaction name="action_lumaChange"/>
     <addaction name="action_bilafilter"/>
    </widget>
+   <widget class="QMenu" name="menu_7">
+    <property name="title">
+     <string>风格滤镜</string>
+    </property>
+    <addaction name="action_nostalgic"/>
+    <addaction name="action_fleeting"/>
+    <addaction name="action_lighting"/>
+    <addaction name="action_building_block"/>
+    <addaction name="action_comic"/>
+    <addaction name="action_lowLight"/>
+    <addaction name="action_casting"/>
+    <addaction name="action_neonLight"/>
+    <addaction name="action_exposal"/>
+    <addaction name="action_freezing"/>
+    <addaction name="action_oilPaint"/>
+   </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
    <addaction name="menu_4"/>
    <addaction name="menu_5"/>
    <addaction name="menu_6"/>
+   <addaction name="menu_7"/>
    <addaction name="menu_3"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -579,6 +596,61 @@
   <action name="action_lumaChange">
    <property name="text">
     <string>亮度调整</string>
+   </property>
+  </action>
+  <action name="action_nostalgic">
+   <property name="text">
+    <string>怀旧特效</string>
+   </property>
+  </action>
+  <action name="action_fleeting">
+   <property name="text">
+    <string>流年特效</string>
+   </property>
+  </action>
+  <action name="action_lighting">
+   <property name="text">
+    <string>光照特效</string>
+   </property>
+  </action>
+  <action name="action_building_block">
+   <property name="text">
+    <string>积木特效</string>
+   </property>
+  </action>
+  <action name="action_comic">
+   <property name="text">
+    <string>连环画特效</string>
+   </property>
+  </action>
+  <action name="action_lowLight">
+   <property name="text">
+    <string>暗调特效</string>
+   </property>
+  </action>
+  <action name="action_casting">
+   <property name="text">
+    <string>熔铸特效</string>
+   </property>
+  </action>
+  <action name="action_neonLight">
+   <property name="text">
+    <string>霓虹特效</string>
+   </property>
+  </action>
+  <action name="action_exposal">
+   <property name="text">
+    <string>曝光特效</string>
+   </property>
+  </action>
+  <action name="action_freezing">
+   <property name="text">
+    <string>冰冻特效</string>
+   </property>
+  </action>
+  <action name="action_oilPaint">
+   <property name="text">
+    <string>油画特效</string>
    </property>
   </action>
  </widget>
