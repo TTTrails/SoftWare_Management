@@ -71,7 +71,12 @@ enum{
     NEONLIGHT,
     EXPOSAL,
     FREEZING,
-    OILPAINT
+    OILPAINT,
+    FSRCNN,
+    EDSR,
+    ESPCN,
+    LAPSRN
+
 
 };
 }

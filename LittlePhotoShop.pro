@@ -104,3 +104,6 @@ FORMS += \
 RESOURCES += \
     langs.qrc \
     imgs.qrc
+
+INCLUDEPATH += D:\opencv\opencv-build\install\include
+LIBS += D:\opencv\opencv-build\lib\libopencv_*.a

@@ -830,6 +830,222 @@ int StateCommonAction::ActionTrigged(int state,Params params)
     }
 
 
+    //超分辨率部分
+    if(actionText==pMainWindow->ui->action_FSRCNN->text())
+    {
+        if(pMainWindow->ifPixmap)
+        {
+            //little treat 先保存然后读
+            Params params;
+            string tmpPic="D:\\tmp.jpg";
+
+            params.setStrings({tmpPic});
+            pMainWindow->saveAsPictureCommand->setParams(params);
+            pMainWindow->saveAsPictureCommand->exec();
+
+            Params newParams;
+            newParams.setType(PIXMAP::FSRCNN);
+
+            newParams.setInts({pMainWindow->ListMapIndex(pMainWindow->ui->layoutListWidget->currentRow()),QInputDialog::getInt(pMainWindow,QStringLiteral("FSRCNN"),
+                               QStringLiteral("请输入超分辨率倍数2~4"),2,2,4,1)});
+            QFileDialog fileDialog(pMainWindow);
+            QString aimPicFileName=fileDialog.getSaveFileName(pMainWindow,QStringLiteral("保存超分辨率图片文件"),".","Images(*.jpg )");
+            string aimPic=aimPicFileName.toStdString();
+            newParams.setStrings({aimPic});
+            pMainWindow->pixmapFilterCommand->setParams(newParams);
+            pMainWindow->pixmapFilterCommand->exec();
+
+        }
+        else
+        {
+            QMessageBox::critical(pMainWindow,QStringLiteral("错误 "),QStringLiteral("请选择一个位图图层以进行滤镜操作 "));
+            if(!QMessageBox::question(pMainWindow,QStringLiteral("合并图层"),QStringLiteral("是否合并全部图层以进行滤镜操作？"),QStringLiteral("合并全部图层"),
+                                      QStringLiteral("取消")))
+            {
+                Params params;
+                string tmpPic="D:\\tmp.jpg";
+
+                params.setStrings({tmpPic});
+                pMainWindow->saveAsPictureCommand->setParams(params);
+                pMainWindow->saveAsPictureCommand->exec();
+
+                PerformLayoutMerge();
+                Params newParams;
+                newParams.setType(PIXMAP::FSRCNN);
+                newParams.setInts({pMainWindow->ListMapIndex(pMainWindow->ui->layoutListWidget->currentRow()),QInputDialog::getInt(pMainWindow,QStringLiteral("FSRCNN"),
+                                   QStringLiteral("请输入超分辨率倍数2~4"),2,2,4,1)});
+                QFileDialog fileDialog(pMainWindow);
+                QString aimPicFileName=fileDialog.getSaveFileName(pMainWindow,QStringLiteral("保存超分辨率图片文件"),".","Images(*.jpg )");
+                string aimPic=aimPicFileName.toStdString();
+                newParams.setStrings({aimPic});
+                pMainWindow->pixmapFilterCommand->setParams(newParams);
+                pMainWindow->pixmapFilterCommand->exec();
+            }
+        }
+        return state;
+    }
+    //超分辨率部分
+    if(actionText==pMainWindow->ui->action_EDSR->text())
+    {
+        if(pMainWindow->ifPixmap)
+        {
+            //little treat 先保存然后读
+            Params params;
+            string tmpPic="D:\\tmp.jpg";
+
+            params.setStrings({tmpPic});
+            pMainWindow->saveAsPictureCommand->setParams(params);
+            pMainWindow->saveAsPictureCommand->exec();
+
+            Params newParams;
+            newParams.setType(PIXMAP::EDSR);
+
+            newParams.setInts({pMainWindow->ListMapIndex(pMainWindow->ui->layoutListWidget->currentRow()),QInputDialog::getInt(pMainWindow,QStringLiteral("EDSR"),
+                               QStringLiteral("请输入超分辨率倍数2~4"),2,2,4,1)});
+            QFileDialog fileDialog(pMainWindow);
+            QString aimPicFileName=fileDialog.getSaveFileName(pMainWindow,QStringLiteral("保存超分辨率图片文件"),".","Images(*.jpg )");
+            string aimPic=aimPicFileName.toStdString();
+            newParams.setStrings({aimPic});
+            pMainWindow->pixmapFilterCommand->setParams(newParams);
+            pMainWindow->pixmapFilterCommand->exec();
+
+        }
+        else
+        {
+            QMessageBox::critical(pMainWindow,QStringLiteral("错误 "),QStringLiteral("请选择一个位图图层以进行滤镜操作 "));
+            if(!QMessageBox::question(pMainWindow,QStringLiteral("合并图层"),QStringLiteral("是否合并全部图层以进行滤镜操作？"),QStringLiteral("合并全部图层"),
+                                      QStringLiteral("取消")))
+            {
+                Params params;
+                string tmpPic="D:\\tmp.jpg";
+
+                params.setStrings({tmpPic});
+                pMainWindow->saveAsPictureCommand->setParams(params);
+                pMainWindow->saveAsPictureCommand->exec();
+
+                PerformLayoutMerge();
+                Params newParams;
+                newParams.setType(PIXMAP::EDSR);
+                newParams.setInts({pMainWindow->ListMapIndex(pMainWindow->ui->layoutListWidget->currentRow()),QInputDialog::getInt(pMainWindow,QStringLiteral("EDSR"),
+                                   QStringLiteral("请输入超分辨率倍数2~4"),2,2,4,1)});
+                QFileDialog fileDialog(pMainWindow);
+                QString aimPicFileName=fileDialog.getSaveFileName(pMainWindow,QStringLiteral("保存超分辨率图片文件"),".","Images(*.jpg )");
+                string aimPic=aimPicFileName.toStdString();
+                newParams.setStrings({aimPic});
+                pMainWindow->pixmapFilterCommand->setParams(newParams);
+                pMainWindow->pixmapFilterCommand->exec();
+            }
+        }
+        return state;
+    }
+
+    if(actionText==pMainWindow->ui->action_ESPCN->text())
+    {
+        if(pMainWindow->ifPixmap)
+        {
+            //little treat 先保存然后读
+            Params params;
+            string tmpPic="D:\\tmp.jpg";
+
+            params.setStrings({tmpPic});
+            pMainWindow->saveAsPictureCommand->setParams(params);
+            pMainWindow->saveAsPictureCommand->exec();
+
+            Params newParams;
+            newParams.setType(PIXMAP::ESPCN);
+
+            newParams.setInts({pMainWindow->ListMapIndex(pMainWindow->ui->layoutListWidget->currentRow()),QInputDialog::getInt(pMainWindow,QStringLiteral("ESPCN"),
+                               QStringLiteral("请输入超分辨率倍数2~4"),2,2,4,1)});
+            QFileDialog fileDialog(pMainWindow);
+            QString aimPicFileName=fileDialog.getSaveFileName(pMainWindow,QStringLiteral("保存超分辨率图片文件"),".","Images(*.jpg )");
+            string aimPic=aimPicFileName.toStdString();
+            newParams.setStrings({aimPic});
+            pMainWindow->pixmapFilterCommand->setParams(newParams);
+            pMainWindow->pixmapFilterCommand->exec();
+
+        }
+        else
+        {
+            QMessageBox::critical(pMainWindow,QStringLiteral("错误 "),QStringLiteral("请选择一个位图图层以进行滤镜操作 "));
+            if(!QMessageBox::question(pMainWindow,QStringLiteral("合并图层"),QStringLiteral("是否合并全部图层以进行滤镜操作？"),QStringLiteral("合并全部图层"),
+                                      QStringLiteral("取消")))
+            {
+                Params params;
+                string tmpPic="D:\\tmp.jpg";
+
+                params.setStrings({tmpPic});
+                pMainWindow->saveAsPictureCommand->setParams(params);
+                pMainWindow->saveAsPictureCommand->exec();
+
+                PerformLayoutMerge();
+                Params newParams;
+                newParams.setType(PIXMAP::ESPCN);
+                newParams.setInts({pMainWindow->ListMapIndex(pMainWindow->ui->layoutListWidget->currentRow()),QInputDialog::getInt(pMainWindow,QStringLiteral("ESPCN"),
+                                   QStringLiteral("请输入超分辨率倍数2~4"),2,2,4,1)});
+                QFileDialog fileDialog(pMainWindow);
+                QString aimPicFileName=fileDialog.getSaveFileName(pMainWindow,QStringLiteral("保存超分辨率图片文件"),".","Images(*.jpg )");
+                string aimPic=aimPicFileName.toStdString();
+                newParams.setStrings({aimPic});
+                pMainWindow->pixmapFilterCommand->setParams(newParams);
+                pMainWindow->pixmapFilterCommand->exec();
+            }
+        }
+        return state;
+    }
+
+    if(actionText==pMainWindow->ui->action_LapSRN->text())
+    {
+        if(pMainWindow->ifPixmap)
+        {
+            //little treat 先保存然后读
+            Params params;
+            string tmpPic="D:\\tmp.jpg";
+
+            params.setStrings({tmpPic});
+            pMainWindow->saveAsPictureCommand->setParams(params);
+            pMainWindow->saveAsPictureCommand->exec();
+
+            Params newParams;
+            newParams.setType(PIXMAP::LAPSRN);
+
+            newParams.setInts({pMainWindow->ListMapIndex(pMainWindow->ui->layoutListWidget->currentRow()),QInputDialog::getInt(pMainWindow,QStringLiteral("LapSRN"),
+                               QStringLiteral("请输入超分辨率倍数2~8"),2,2,8,2)});
+            QFileDialog fileDialog(pMainWindow);
+            QString aimPicFileName=fileDialog.getSaveFileName(pMainWindow,QStringLiteral("保存超分辨率图片文件"),".","Images(*.jpg )");
+            string aimPic=aimPicFileName.toStdString();
+            newParams.setStrings({aimPic});
+            pMainWindow->pixmapFilterCommand->setParams(newParams);
+            pMainWindow->pixmapFilterCommand->exec();
+
+        }
+        else
+        {
+            QMessageBox::critical(pMainWindow,QStringLiteral("错误 "),QStringLiteral("请选择一个位图图层以进行滤镜操作 "));
+            if(!QMessageBox::question(pMainWindow,QStringLiteral("合并图层"),QStringLiteral("是否合并全部图层以进行滤镜操作？"),QStringLiteral("合并全部图层"),
+                                      QStringLiteral("取消")))
+            {
+                Params params;
+                string tmpPic="D:\\tmp.jpg";
+
+                params.setStrings({tmpPic});
+                pMainWindow->saveAsPictureCommand->setParams(params);
+                pMainWindow->saveAsPictureCommand->exec();
+
+                PerformLayoutMerge();
+                Params newParams;
+                newParams.setType(PIXMAP::LAPSRN);
+                newParams.setInts({pMainWindow->ListMapIndex(pMainWindow->ui->layoutListWidget->currentRow()),QInputDialog::getInt(pMainWindow,QStringLiteral("LapSRN"),
+                                   QStringLiteral("请输入超分辨率倍数2~8"),2,2,8,2)});
+                QFileDialog fileDialog(pMainWindow);
+                QString aimPicFileName=fileDialog.getSaveFileName(pMainWindow,QStringLiteral("保存超分辨率图片文件"),".","Images(*.jpg )");
+                string aimPic=aimPicFileName.toStdString();
+                newParams.setStrings({aimPic});
+                pMainWindow->pixmapFilterCommand->setParams(newParams);
+                pMainWindow->pixmapFilterCommand->exec();
+            }
+        }
+        return state;
+    }
     return state;
 }
 

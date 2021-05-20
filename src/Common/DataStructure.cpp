@@ -1,24 +1,20 @@
 #include "../Common/DataStructure.h"
 #include <cstdlib>
 #include <QDebug>
+#include <opencv2/dnn_superres.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/highgui.hpp>
+#include <QFileDialog>
+#include <QCoreApplication>
+
+using namespace std;
+using namespace cv;
+using namespace dnn;
+using namespace dnn_superres;
 using namespace PIXMAP;
 #ifndef PI
 #define PI 3.141592
 #endif
-
-typedef struct strBmpFileHeader
-{
-    UNUM16 bfType, bfReserved1, bfReserved2;
-    UNUM32 bfSize, bfOffBits;
-}BmpFileHeader;
-
-typedef struct strBmpFileInformation
-{
-    UNUM16 biPlanes, biBitCount;
-    UNUM32 biSize, biWidth, biCompression, biSizeImage, biXPelsPerMeter, biYPelsPerMeter, biClrUsed, biClrImportant;
-    SNUM32 biHeight;
-}BmpFileInformation;
-
 
 Pixmap::Pixmap(int posX, int posY, int type, const string &name, double scaleX, double scaleY, double angle,unsigned int width,
                unsigned int height,unsigned char value):BaseShape(posX, posY, type, name, scaleX, scaleY, angle)
@@ -1097,6 +1093,121 @@ int Pixmap::OilPaint(){
         ConvertToYUV();
     return 0;
 }
+
+
+//超分辨率部分
+int Pixmap::FSRCNN(int x,string aimPic){
+
+    //Create the module's object
+    DnnSuperResImpl sr;
+
+    //Set the image you would like to upscale
+    string img_path = "D:\\tmp.jpg";
+    Mat img = cv::imread(img_path);
+
+    string path=QCoreApplication::applicationDirPath().toStdString();
+    switch (x) {
+    case 2: path += "/model/FSRCNN/FSRCNN_x2.pb";
+            break;
+    case 3: path += "/model/FSRCNN/FSRCNN_x3.pb"; break;
+    case 4: path += "/model/FSRCNN/FSRCNN_x4.pb"; break;
+    }
+//    QString qstr2 = QString::fromStdString(path);
+//    qDebug()<<qstr2;
+    sr.readModel(path);//Read the desired model
+
+    //Set the desired model and scale to get correct pre- and post-processing
+    sr.setModel("fsrcnn", x);
+
+
+    //Upscale
+    Mat img_new;
+    sr.upsample(img, img_new);
+    cv::imwrite( aimPic, img_new);
+    //cv::imwrite( "D:\\tmp_upscaled.jpg", img_new);
+//    img_path="tmp_upscaled.jpg";
+//    QImage tmpImage(QString::fromStdString(img_path));
+//    tmpImage.convertToFormat(QImage::Format_ARGB32);
+//    //FreePixmap();虽然不free会导致内存泄露，但是导致更严重的事情，只能说是不幸
+//    this->name=PIXMAP::FMT_RGB;
+//    if(!tmpImage.isNull())
+//    {
+//        Load(tmpImage);
+//       BaseShape::setPosX(width);
+//        BaseShape::setPosY(height);
+//    }
+
+}
+
+
+int Pixmap::EDSR(int x,string aimPic){
+    DnnSuperResImpl sr;
+
+    string img_path = "D:\\tmp.jpg";
+    Mat img = cv::imread(img_path);
+
+    string path=QCoreApplication::applicationDirPath().toStdString();
+
+    switch (x) {
+    case 2: path += "/model/EDSR/EDSR_x2.pb"; break;
+    case 3: path += "/model/EDSR/EDSR_x3.pb"; break;
+    case 4: path += "/model/EDSR/EDSR_x4.pb"; break;
+    }
+    sr.readModel(path);//Read the desired model
+
+    sr.setModel("edsr", x);
+
+    Mat img_new;
+    sr.upsample(img, img_new);
+    //cv::imwrite( "D:\\tmp_upscaled.jpg", img_new);
+    cv::imwrite( aimPic, img_new);
+}
+
+int Pixmap::ESPCN(int x,string aimPic){
+    DnnSuperResImpl sr;
+
+    string img_path = "D:\\tmp.jpg";
+    Mat img = cv::imread(img_path);
+
+    string path=QCoreApplication::applicationDirPath().toStdString();
+    switch (x) {
+    case 2: path += "/model/ESPCN/ESPCN_x2.pb"; break;
+    case 3: path += "/model/ESPCN/ESPCN_x3.pb"; break;
+    case 4: path += "/model/ESPCN/ESPCN_x4.pb"; break;
+    }
+    sr.readModel(path);//Read the desired model
+
+    sr.setModel("espcn", x);
+
+    Mat img_new;
+    sr.upsample(img, img_new);
+    //cv::imwrite( "D:\\tmp_upscaled.jpg", img_new);
+    cv::imwrite( aimPic, img_new);
+}
+
+int Pixmap::LapSRN(int x,string aimPic){
+    DnnSuperResImpl sr;
+
+    string img_path = "D:\\tmp.jpg";
+    Mat img = cv::imread(img_path);
+
+    string path=QCoreApplication::applicationDirPath().toStdString();
+    switch (x) {
+    case 2: path +=  "/model/LapSRN/LapSRN_x2.pb"; break;
+    case 4: path += "/model/LapSRN/LapSRN_x4.pb"; break;
+    case 8: path += "/model/LapSRN/LapSRN_x8.pb"; break;
+    }
+    sr.readModel(path);//Read the desired model
+
+    sr.setModel("lapsrn", x);
+
+    Mat img_new;
+    sr.upsample(img, img_new);
+    //cv::imwrite( "D:\\tmp_upscaled.jpg", img_new);
+    cv::imwrite( aimPic, img_new);
+}
+
+
 
 //----------------------------Pixmap End-----------------------------//
 //----------------------------histogram begin------------------------//

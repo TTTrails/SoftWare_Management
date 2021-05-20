@@ -688,6 +688,7 @@ void Model::DeleteLayout(int LayoutIndex){
      int type=params.getType();
      vector<int> ints=params.getInts();
      vector<double> doubles=params.getDoubles();
+     vector<string> strings = params.getStrings();
      int layoutindex=ints[0];
      if(layoutindex<0)return;
      if(layouts.list.at(layoutindex)->getType()!=SHAPE::PIXMAP)return;
@@ -788,6 +789,18 @@ void Model::DeleteLayout(int LayoutIndex){
          break;
     case PIXMAP::OILPAINT:
          pic->OilPaint();
+         break;
+    case PIXMAP::FSRCNN:
+     {pic->FSRCNN(ints[1],strings[0]);
+         break;}
+    case PIXMAP::EDSR:
+         pic->EDSR(ints[1],strings[0]);
+         break;
+    case PIXMAP::ESPCN:
+         pic->ESPCN(ints[1],strings[0]);
+         break;
+    case PIXMAP::LAPSRN:
+         pic->LapSRN(ints[1],strings[0]);
          break;
      default:
          return;

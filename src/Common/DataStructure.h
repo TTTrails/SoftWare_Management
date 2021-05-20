@@ -471,6 +471,14 @@ public:
     int OilPaint();//油画特效
 
 
+    //超分辨率
+    int FSRCNN(int x,string aimPic);
+    int ESPCN(int x,string aimPic);
+    int EDSR(int x,string aimPic);
+    int LapSRN(int x,string aimPic);
+
+
+
     const unsigned char *getRHead() const { return r; }	//返回r数组
     const unsigned char *getGHead() const { return g; }	//返回g数组
     const unsigned char *getBHead() const { return b; }	//返回b数组
